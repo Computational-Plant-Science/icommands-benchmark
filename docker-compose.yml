@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  irods:
+    image: mjstealey/irods-provider-postgres:4.2.3
+    ports:
+      - 1247:1247
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - irods
+    command: ./util/wait-for-it.sh $IRODS_HOST:$IRODS_PORT -- ./benchmark.sh -h $IRODS_HOST -p $IRODS_PORT -z $IRODS_ZONE -u $IRODS_USER -w $IRODS_PASSWORD
