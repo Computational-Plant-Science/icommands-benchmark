@@ -57,5 +57,3 @@ services:
 You will also need to adjust environment variables.
 
 Run the benchmark with `docker-compose -f docker-compose.yml up --build`.
-
-###
